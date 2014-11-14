@@ -1,0 +1,6 @@
+# Sample gitconfig
+#
+
+[user]
+        name = christriddle
+        email = christriddle@gmail.com
