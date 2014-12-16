@@ -54,7 +54,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/go/bin:$HOME/.nodenv/bin:/opt/boxen/homebrew/share/python:bin:/opt/boxen/packer:/opt/boxen/rbenv/shims:/opt/boxen/rbenv/bin:/opt/boxen/rbenv/plugins/ruby-build/bin:node_modules/.bin:/opt/boxen/nodenv/shims:/opt/boxen/nodenv/bin:/opt/boxen/bin:/opt/boxen/homebrew/bin:/opt/boxen/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/boxen/nodenv/versions/v0.10.26/bin"
+export GOPATH=$HOME/go
+
+export PATH="/usr/local/go/bin:$HOME/.nodenv/bin:/opt/boxen/homebrew/share/python:bin:/opt/boxen/packer:/opt/boxen/rbenv/shims:/opt/boxen/rbenv/bin:/opt/boxen/rbenv/plugins/ruby-build/bin:node_modules/.bin:/opt/boxen/nodenv/shims:/opt/boxen/nodenv/bin:/opt/boxen/bin:/opt/boxen/homebrew/bin:/opt/boxen/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/boxen/nodenv/versions/v0.10.26/bin:$GOPATH/bin"
 export NODENV_ROOT=/opt/boxen/nodenv
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
 
@@ -79,4 +81,5 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
 # added by travis gem
 [ -f /Users/criddle/.travis/travis.sh ] && source /Users/criddle/.travis/travis.sh
 
-
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'

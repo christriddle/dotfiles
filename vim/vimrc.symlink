@@ -92,6 +92,9 @@ NeoBundle "freitass/todo.txt-vim"
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'digitaltoad/vim-jade'
 
+NeoBundle 'OmniSharp/omnisharp-vim'
+NeoBundle 'tpope/vim-dispatch'
+
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
   source ~/.vimrc.local.bundles
@@ -258,8 +261,10 @@ nnoremap <silent> <leader>sh :VimShellCreate<CR>
 if !exists('*s:setupWrapping')
   function s:setupWrapping()
     set wrap
-    set wm=2
-    set textwidth=79
+    set linebreak
+    set nolist
+    set wm=0
+    set textwidth=0
   endfunction
 endif
 
@@ -376,7 +381,7 @@ noremap <leader>w :bn<CR>
 noremap <leader>c :Bclose<CR>
 
 "" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>
+nnoremap <silent> <leader>m :noh<cr>
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
@@ -480,11 +485,73 @@ no <C-S-Right> <C-w>>
 
 set expandtab
 
-set textwidth=0 wrapmargin=0
-
 nmap s <Plug>(easymotion-s2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+
+"""""" Omnisharp """""""
+let g:OmniSharp_timeout = 1
+set noshowmatch
+set completeopt=longest,menuone,preview
+set splitbelow
+
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+augroup omnisharp_commands
+    autocmd!
+
+    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+    " Synchronous build (blocks Vim)
+    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+    " Builds can also run asynchronously with vim-dispatch installed
+    autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
+
+    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+    " Automatically add new cs files to the nearest project on save
+    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+
+    "show type information automatically when the cursor stops moving
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+    "The following commands are contextual, based on the current cursor position.
+
+    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
+    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
+    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr> "finds members in the current buffer
+    " cursor can be anywhere on the line containing an issue 
+    autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>  
+    autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
+    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+    autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr> "navigate up by method/property/field
+    autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr> "navigate down by method/property/field
+
+augroup END
+
+set cmdheight=2
+
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>ct <Plug>(go-coverage)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au FileType go nmap <F2> <Plug>(go-rename)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
