@@ -94,6 +94,7 @@ NeoBundle 'digitaltoad/vim-jade'
 
 NeoBundle 'OmniSharp/omnisharp-vim'
 NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'schickling/vim-bufonly'
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
@@ -248,7 +249,7 @@ noremap <F3> :NERDTreeToggle<CR>
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
-let Grep_Skip_Dirs = 'node_modules bower_components' 
+let Grep_Skip_Dirs = 'node_modules bower_components'
 
 " vimshell
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
@@ -379,6 +380,7 @@ noremap <leader>w :bn<CR>
 
 "" Close buffer
 noremap <leader>c :Bclose<CR>
+noremap <leader>C :BufOnly<CR>
 
 "" Clean search (highlight)
 nnoremap <silent> <leader>m :noh<cr>
@@ -414,7 +416,7 @@ autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
     \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
 " jade
-autocmd FileType jade setlocal expandtab shiftwidth=2 tabstop=2 
+autocmd FileType jade setlocal expandtab shiftwidth=2 tabstop=2
 
 " jedi-vim
 let g:jedi#popup_on_dot = 0
@@ -527,8 +529,8 @@ augroup omnisharp_commands
     autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
     autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
     autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr> "finds members in the current buffer
-    " cursor can be anywhere on the line containing an issue 
-    autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>  
+    " cursor can be anywhere on the line containing an issue
+    autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
     autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
     autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
     autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
