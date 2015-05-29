@@ -83,3 +83,4 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
 
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"

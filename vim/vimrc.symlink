@@ -95,6 +95,7 @@ NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'OmniSharp/omnisharp-vim'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'schickling/vim-bufonly'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
@@ -170,29 +171,28 @@ colorscheme molokai
 
 set mousemodel=popup
 set t_Co=256
-set nocursorline
 set guioptions=egmrti
 set gfn=Monospace\ 8
 
 if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
-    set transparency=7
-  endif
+if has("gui_mac") || has("gui_macvim")
+set guifont=Menlo:h12
+set transparency=7
+endif
 else
-  let g:CSApprox_loaded = 1
+let g:CSApprox_loaded = 1
 
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
-  endif
+if $COLORTERM == 'gnome-terminal'
+set term=gnome-256color
+else
+if $TERM == 'xterm'
+  set term=xterm-256color
+endif
+endif
 endif
 
 if &term =~ '256color'
-  set t_ut=
+set t_ut=
 endif
 
 "" Disable the blinking cursor.
@@ -315,11 +315,6 @@ noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
 
-"" Tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
-
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
@@ -363,7 +358,7 @@ nnoremap <silent> <leader>S :call TrimWhiteSpace()<cr>:let @/=''<CR>
 
 "" Copy/Paste/Cut
 noremap YY "+y<CR>
-noremap P "+gP<CR>
+noremap P "+gp
 noremap XX "+x<CR>
 
 if has('macunix')
@@ -439,9 +434,6 @@ let g:airline#extensions#tagbar#enabled = 1
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-
-
-
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
@@ -478,6 +470,10 @@ no <S-Down>  <C-w>j
 no <S-Up>    <C-w>k
 no <S-Left>  <C-w>h
 no <S-Right> <C-w>l
+no <C-J>     <C-w>j
+no <C-K>     <C-w>k
+no <C-H>     <C-w>h
+no <C-L>     <C-w>l
 "
 " " Change window size with control + arrow keys
 no <C-S-Down>  <C-w>-
