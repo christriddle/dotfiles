@@ -58,7 +58,8 @@ export GOPATH=$HOME/go
 
 export PATH="/usr/local/go/bin:$HOME/.nodenv/bin:/opt/boxen/homebrew/share/python:bin:/opt/boxen/packer:/opt/boxen/rbenv/shims:/opt/boxen/rbenv/bin:/opt/boxen/rbenv/plugins/ruby-build/bin:node_modules/.bin:/opt/boxen/nodenv/shims:/opt/boxen/nodenv/bin:/opt/boxen/bin:/opt/boxen/homebrew/bin:/opt/boxen/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/boxen/nodenv/versions/v0.10.26/bin:$GOPATH/bin"
 export NODENV_ROOT=/opt/boxen/nodenv
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
+export JRE_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -84,3 +85,14 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
+
+PERL_MB_OPT="--install_base \"/Users/chrisr/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/chrisr/perl5"; export PERL_MM_OPT;
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Code
+source /usr/local/bin/virtualenvwrapper.sh
+
+export WHEELHOUSE="${HOME}/.cache/pip/wheelhouse"
+export PIP_FIND_LINKS="file://${WHEELHOUSE}"
+export PIP_WHEEL_DIR="${WHEELHOUSE}"
